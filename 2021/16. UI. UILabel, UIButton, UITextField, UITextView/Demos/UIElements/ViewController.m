@@ -55,6 +55,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     self.usernameTextField.leftView = imageView;
     self.usernameTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.usernameTextField.clipsToBounds = true;
     */
 
     // Subscrube on keyboard events
