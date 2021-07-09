@@ -49,15 +49,6 @@
                         action:@selector(saveButtonTapped:)
               forControlEvents:UIControlEventTouchUpInside];
 
-    // Setup textField button
-    /*
-    UIImage *image = [UIImage imageNamed:@"user-512px"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    self.usernameTextField.leftView = imageView;
-    self.usernameTextField.leftViewMode = UITextFieldViewModeAlways;
-    self.usernameTextField.clipsToBounds = true;
-    */
-
     // Subscrube on keyboard events
     [self subscribeOnKeyboardEvents];
     [self hideWhenTappedAround];
@@ -65,6 +56,15 @@
     // Set delegates
     self.usernameTextField.delegate = self;
     self.commentTextView.delegate = self;
+    
+    //     Setup textField button
+        /*
+        UIImage *image = [UIImage imageNamed:@"user-512px"];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        self.usernameTextField.leftView = imageView;
+        self.usernameTextField.leftViewMode = UITextFieldViewModeAlways;
+        self.usernameTextField.clipsToBounds = true;
+        */
 }
 
 
@@ -98,12 +98,12 @@
 - (void)subscribeOnKeyboardEvents {
     // Keyboard will show
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(keybaordWillShow:)
+                                           selector:@selector(keyboardWillShow:)
                                                name:UIKeyboardWillShowNotification
                                              object:nil];
     // Keyboard will hide
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(keybaordWillHide:)
+                                           selector:@selector(keyboardWillHide:)
                                                name:UIKeyboardWillHideNotification
                                              object:nil];
 }
@@ -118,13 +118,13 @@
     [self.view endEditing:true];
 }
 
-- (void)keybaordWillShow:(NSNotification *)notification {
+- (void)keyboardWillShow:(NSNotification *)notification {
     CGRect rect = [(NSValue *)notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
     [self updateTopContraintWith:15.0 andBottom:rect.size.height - self.view.safeAreaInsets.bottom + 15.0];
 }
 
-- (void)keybaordWillHide:(NSNotification *)notification {
+- (void)keyboardWillHide:(NSNotification *)notification {
     [self updateTopContraintWith:200.0 andBottom:0.0];
 }
 
